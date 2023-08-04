@@ -1,0 +1,41 @@
+1. npm init 
+2. "start": "node server.js -w"
+3. install express cors mongoose dotenv
+4. import them in server.js file
+** server.js file ==>> {
+    const express = require("express")
+    const db = require("mongoose")
+    const cors = require("cors")
+    require("dotenv").config();
+    const port = process.env.PORT || 7000;
+    const app = express()
+
+    db.connect(process.env.MONGOURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+    }).then(() => console.log('db connected ...')).catch(err => console.log(err.massage))
+
+    app.listen(port, () => console.log('server connect on port ' + port))
+
+    app.use(cors())
+    app.use(express.json())
+}
+** process.env.mongourl
+** module.exports.save = () => {}
+** module.exports = routes
+5. make schema in modals folder for db
+6. make controller (functions on DB) ==>> {
+    ** get ==>> modal.find()
+    ** {data} = req.body
+    ** post ==>> modal.create({data})
+    ** update ==>> modal.findByIdAndUpdate(_id, {data})
+    ** delete ==>> modal.findByIdAndDelete(_id)
+    ** after every one => .then(()=> res.set(201).send('success')).catch(Err=> clg(err))
+}
+*** MONGOURL = mongodb+srv://mahmoudmandor65:GF0gevXLiybBTiCK@cluster0.qmmyog9.mongodb.net/?retryWrites=true&w=majority
+
+7. add endpoints in routes file ==>> {
+    const {Router} = require('express')
+    const router = Router()
+    router.get('/read', getControllerFn)
+}
